@@ -1,14 +1,18 @@
+import { useEffect, useState } from 'react';
+import auth from '@react-native-firebase/auth';
 import { Heading, HStack, IconButton, Text, useTheme, VStack, FlatList, Center } from 'native-base';
 import { SignOut, ChatTeardropText } from 'phosphor-react-native';
-import { useState } from 'react';
+import firestore from '@react-native-firebase/firestore';
 
 import Logo from '../assets/logo_secondary.svg';
 import { Filter } from '../components/Filter';
 import { Button } from '../components/Button';
 import { Order, OrderProps } from '../components/Order';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
 
 export function Home() {
+  const [isLoading, setIsLoading] = useState(true);
   const [statusSelected, setStatisSelected] = useState<'open' | 'closed'>('open');
   const [orders, setOrders] = useState<OrderProps[]>([]);
 
@@ -22,6 +26,20 @@ export function Home() {
   function handleOpneDetails(orderId: string) {
     navigation.navigate('details', { orderId })
   }
+
+  function handleLogout() {
+    auth().signOut()
+    .catch(error => {
+      console.log(error);
+      return Alert.alert('Sair', 'Não foi possível sair.')
+    })
+  }
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    
+  }, []);
 
   return (
     <VStack flex={1} pb={6} bg="gray.700">
@@ -37,7 +55,8 @@ export function Home() {
         <Logo />
 
         <IconButton
-          icon={<SignOut size={26} color={colors.gray[300]} />}
+          icon={<SignOut size={26} color={colors.gray[300]} />}          
+          onPress={handleLogout}
         />
        </HStack> 
 
