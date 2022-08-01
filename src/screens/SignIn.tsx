@@ -25,7 +25,6 @@ export function SignIn() {
     auth().signInWithEmailAndPassword(email, password)
     .then(response => {
       console.log(response);
-      setIsLoading(false);
     })
     .catch((error) => {
       console.log(error);
