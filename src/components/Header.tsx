@@ -17,7 +17,7 @@ export function Header({ title, ...rest }) {
       alignItems="center"
       bg="gray.600"
       pb={6}
-      pt={12}
+      pt={12}      
       {...rest}
     >
       <IconButton
