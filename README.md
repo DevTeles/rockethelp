@@ -26,6 +26,7 @@
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 - React-Native
+- Native Base
 - Expo
 - TypeScript
 - react-navigation/native
